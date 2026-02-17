@@ -44,7 +44,7 @@ const resourceData = [
     title: "SQL Beginner to Advanced (0 - 100)",
     description: "Complete SQL learning roadmap from basics to advanced concepts",
     price: "₹1",
-    link: "https://drive.google.com/file/d/1yMzP2taOetwW8AT_K00TgUu2RTd2cr3j/view?usp=drive_link",
+    link: "https://drive.google.com/drive/folders/13cNUA1VTncuas1JYf0J7_TpPToj7aV5W?usp=sharing",
     image: sql0to100,
     isPopular: false,
     isBestSeller: true,
