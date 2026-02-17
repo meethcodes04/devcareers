@@ -12,7 +12,8 @@ app.use(cors({
     'http://localhost:3000',
     process.env.FRONTEND_URL,
   ].filter(Boolean),
-  credentials: true
+  credentials: true,
+  exposedHeaders: ['x-rtb-fingerprint-id'], // 👈 add this
 }));
 
 app.use(express.json());
