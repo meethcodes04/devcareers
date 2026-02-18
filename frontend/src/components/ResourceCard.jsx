@@ -5,8 +5,13 @@ function ResourceCard({ resource, isMobile = false }) {
 
   // Navigate to resource detail page
   const handleCardClick = () => {
+  const isFree = !resource.price || resource.price === "";
+  if (isFree) {
+    window.open(resource.link, "_blank");
+  } else {
     navigate(`/resource/${resource.id}`);
-  };
+  }
+};
 
   // Badge configuration
   const badges = [];
@@ -106,7 +111,7 @@ function ResourceCard({ resource, isMobile = false }) {
 
         <div className="flex flex-col items-end gap-2">
           <span className="text-lg font-bold text-amber-600">
-            {resource.price}
+            {resource.price && resource.price !== "" ? resource.price : "Free"}
           </span>
 
           <div className="p-2 bg-amber-500 rounded-full">
@@ -168,7 +173,7 @@ function ResourceCard({ resource, isMobile = false }) {
 
         <div className="flex items-center justify-between mt-auto pt-3 border-t border-amber-200">
           <span className="text-lg font-bold text-amber-600">
-            {resource.price}
+            {resource.price && resource.price !== "" ? resource.price : "Free"}
           </span>
 
           <div className="p-2 bg-amber-500 rounded-full group-hover:bg-amber-600 transition-colors">

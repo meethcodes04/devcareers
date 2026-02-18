@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Object Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0d0d0d;
+      --surface: #141414;
+      --border: #2a2a2a;
+      --accent: #f97316;
+      --accent2: #fb923c;
+      --text: #e5e5e5;
+      --muted: #666;
+      --green: #4ade80;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'Syne', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 24px;
+      background-image:
+        radial-gradient(ellipse at 20% 20%, rgba(249,115,22,0.05) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 80%, rgba(249,115,22,0.03) 0%, transparent 60%);
+    }
+    .wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .full-width { grid-column: 1 / -1; }
+    header {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 4px;
+    }
+    h1 { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; color: var(--accent); }
+    .id-box {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 8px 14px;
+    }
+    .id-box label { font-size: 12px; color: var(--muted); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+    .id-box input {
+      width: 52px; background: transparent; border: none;
+      color: var(--accent); font-family: var(--mono); font-size: 18px;
+      font-weight: 700; text-align: center; outline: none;
+    }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+    .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+    .field:last-child { margin-bottom: 0; }
+    label { font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); }
+    input, textarea {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 7px; color: var(--text); font-family: var(--sans);
+      font-size: 14px; padding: 10px 12px; transition: border-color 0.2s;
+      outline: none; width: 100%;
+    }
+    input:focus, textarea:focus { border-color: var(--accent); }
+    textarea { resize: vertical; font-family: var(--mono); font-size: 12px; line-height: 1.6; }
+    .irow { display: flex; gap: 6px; align-items: center; }
+    .irow input { flex: 1; width: auto; }
+    .tarow { display: flex; gap: 6px; align-items: flex-start; }
+    .tarow textarea { flex: 1; width: auto; }
+    .pbtn {
+      flex-shrink: 0; width: 34px; height: 38px;
+      background: #1a1a1a; border: 1px solid var(--border);
+      border-radius: 7px; color: var(--muted); font-size: 14px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: all 0.15s; padding: 0;
+    }
+    .pbtn:hover { background: var(--accent); border-color: var(--accent); color: #000; }
+    .pbtn.ok { background: var(--green); border-color: var(--green); color: #000; }
+    .pbtn-ta {
+      flex-shrink: 0; width: 34px;
+      background: #1a1a1a; border: 1px solid var(--border);
+      border-radius: 7px; color: var(--muted); font-size: 14px;
+      cursor: pointer; display: flex; align-items: flex-start; justify-content: center;
+      padding: 10px 0; transition: all 0.15s; align-self: stretch;
+    }
+    .pbtn-ta:hover { background: var(--accent); border-color: var(--accent); color: #000; }
+    .pbtn-ta.ok { background: var(--green); border-color: var(--green); color: #000; }
+    .toggles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .toggle-item {
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 8px; padding: 10px 14px; cursor: pointer; transition: border-color 0.2s;
+    }
+    .toggle-item:hover { border-color: var(--accent); }
+    .toggle-item.active { border-color: var(--accent); background: rgba(249,115,22,0.08); }
+    .toggle-label { font-size: 12px; font-weight: 600; color: var(--text); }
+    .switch {
+      width: 36px; height: 20px; background: var(--border);
+      border-radius: 100px; position: relative; transition: background 0.2s; flex-shrink: 0;
+    }
+    .switch::after {
+      content: ''; position: absolute; width: 14px; height: 14px;
+      background: #fff; border-radius: 50%; top: 3px; left: 3px; transition: transform 0.2s;
+    }
+    .toggle-item.active .switch { background: var(--accent); }
+    .toggle-item.active .switch::after { transform: translateX(16px); }
+    .btn-row { display: flex; gap: 10px; margin-top: 6px; }
+    button {
+      font-family: var(--sans); font-weight: 700; font-size: 14px;
+      border: none; border-radius: 8px; padding: 12px 20px;
+      cursor: pointer; transition: all 0.2s; letter-spacing: 0.3px;
+    }
+    .btn-generate { background: var(--accent); color: #000; flex: 2; }
+    .btn-generate:hover { background: var(--accent2); transform: translateY(-1px); }
+    .btn-copy { background: var(--border); color: var(--text); flex: 1; }
+    .btn-copy:hover { background: #333; }
+    .btn-copy.copied { background: var(--green); color: #000; }
+    .btn-clear { background: transparent; color: var(--muted); border: 1px solid var(--border); flex: 1; }
+    .btn-clear:hover { color: var(--text); border-color: #444; }
+    .output-card { grid-column: 1 / -1; background: #080808; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .output-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--surface);
+    }
+    .output-title { font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); }
+    .dot-row { display: flex; gap: 6px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #ff5f57; } .dot-y { background: #ffbd2e; } .dot-g { background: #28c840; }
+    pre {
+      font-family: var(--mono); font-size: 12.5px; line-height: 1.7;
+      padding: 20px; color: #a0a0a0; white-space: pre-wrap; word-break: break-all;
+      max-height: 380px; overflow-y: auto; min-height: 60px;
+    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+    @media (max-width: 600px) {
+      .wrapper { grid-template-columns: 1fr; }
+      header { flex-direction: column; align-items: flex-start; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <header class="full-width">
+    <h1>Product Object Generator</h1>
+    <div class="id-box">
+      <label>ID</label>
+      <input type="number" id="idCounter" value="1" min="1"/>
+    </div>
+  </header>
+
+  <!-- LEFT COLUMN -->
+  <div style="display:flex;flex-direction:column;gap:14px;">
+    <div class="card">
+
+      <div class="field">
+        <label>Title</label>
+        <div class="irow">
+          <input id="title" placeholder="e.g., SQL Beginner to Advanced (0-100)" maxlength="60"/>
+          <button class="pbtn" onclick="pasteInto('title',this)">📋</button>
+        </div>
+        <span id="titleCount" style="font-size:11px;color:var(--muted);text-align:right;">0 / 60</span>
+      </div>
+
+      <div class="field">
+        <label>Description <span style="color:var(--muted);font-size:10px;text-transform:none;">(short, 1 line)</span></label>
+        <div class="irow">
+          <input id="description" placeholder="e.g., Complete SQL learning roadmap from basics to advanced"/>
+          <button class="pbtn" onclick="pasteInto('description',this)">📋</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Price <span style="color:var(--muted);font-size:10px;text-transform:none;">— type 9 → ₹9 | empty → Free</span></label>
+        <div class="irow">
+          <input id="price" placeholder="e.g., 9  (leave empty for Free)" style="max-width:220px;"/>
+          <button class="pbtn" onclick="pasteInto('price',this)">📋</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Link</label>
+        <div class="irow">
+          <input id="link" placeholder="https://drive.google.com/..."/>
+          <button class="pbtn" onclick="pasteInto('link',this)">📋</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Image Variable</label>
+        <div class="irow">
+          <input id="image" placeholder="e.g., sql0to100"/>
+          <button class="pbtn" onclick="pasteInto('image',this)">📋</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Copies Sold</label>
+        <div class="irow">
+          <input id="copiesSold" placeholder="e.g., 55"/>
+          <button class="pbtn" onclick="pasteInto('copiesSold',this)">📋</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="card">
+      <label style="display:block;margin-bottom:12px;">Flags</label>
+      <div class="toggles">
+        <div class="toggle-item" data-key="isPopular"><span class="toggle-label">Popular</span><div class="switch"></div></div>
+        <div class="toggle-item" data-key="isBestSeller"><span class="toggle-label">Best Seller</span><div class="switch"></div></div>
+        <div class="toggle-item" data-key="isPlacementFocused"><span class="toggle-label">Placement</span><div class="switch"></div></div>
+        <div class="toggle-item" data-key="isAdvancedLevel"><span class="toggle-label">Advanced</span><div class="switch"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT COLUMN -->
+  <div style="display:flex;flex-direction:column;gap:14px;">
+
+    <div class="card" style="flex:1;">
+      <div class="field" style="height:100%;">
+        <label>longDescription <span style="color:var(--muted);font-size:10px;text-transform:none;">(one item per line)</span></label>
+        <div class="tarow" style="flex:1;">
+          <textarea id="longDescription" style="min-height:140px;" placeholder="100 SQL Questions with Answers
+25 Basic Level Questions
+25 Intermediate Questions
+17-Page SQL Cheatsheet (BONUS)"></textarea>
+          <button class="pbtn-ta" onclick="pasteInto('longDescription',this)">📋</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="flex:1;">
+      <div class="field" style="height:100%;">
+        <label>shouldYouBuyFor <span style="color:var(--muted);font-size:10px;text-transform:none;">(one reason per line)</span></label>
+        <div class="tarow" style="flex:1;">
+          <textarea id="shouldYouBuyFor" style="min-height:140px;" placeholder="Covers SQL from beginner to advanced in one place
+Includes real interview-level scenario questions
+Helps you understand query optimization clearly"></textarea>
+          <button class="pbtn-ta" onclick="pasteInto('shouldYouBuyFor',this)">📋</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-generate" onclick="generate()">Generate Object</button>
+      <button class="btn-copy" id="copyBtn" onclick="copyOutput()">Copy</button>
+      <button class="btn-clear" onclick="clearAll()">Clear</button>
+    </div>
+
+  </div>
+
+  <!-- OUTPUT -->
+  <div class="output-card full-width">
+    <div class="output-header">
+      <div class="dot-row">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+      </div>
+      <span class="output-title">Generated Object</span>
+      <span id="outputStatus" style="font-size:11px;color:var(--muted);">waiting...</span>
+    </div>
+    <pre id="output">// Fill in the fields and click Generate Object</pre>
+  </div>
+
+</div>
+
+<script>
+  let flags = { isPopular: false, isBestSeller: false, isPlacementFocused: false, isAdvancedLevel: false };
+  let lastOutput = '';
+
+  const saved = JSON.parse(localStorage.getItem('pogState') || '{}');
+  if (saved.id) document.getElementById('idCounter').value = saved.id;
+  if (saved.flags) flags = { ...flags, ...saved.flags };
+
+  document.querySelectorAll('.toggle-item').forEach(el => {
+    const key = el.dataset.key;
+    if (flags[key]) el.classList.add('active');
+    el.addEventListener('click', () => {
+      flags[key] = !flags[key];
+      el.classList.toggle('active', flags[key]);
+      saveState();
+    });
+  });
+
+  const titleInput = document.getElementById('title');
+  const titleCount = document.getElementById('titleCount');
+  titleInput.addEventListener('input', () => {
+    const len = titleInput.value.length;
+    titleCount.textContent = `${len} / 60`;
+    titleCount.style.color = len > 55 ? '#f87171' : len > 45 ? '#fbbf24' : 'var(--muted)';
+  });
+
+  document.getElementById('idCounter').addEventListener('input', saveState);
+
+  function saveState() {
+    localStorage.setItem('pogState', JSON.stringify({
+      id: document.getElementById('idCounter').value,
+      flags
+    }));
+  }
+
+  function formatPrice(raw) {
+    const t = raw.trim();
+    if (!t) return 'Free';
+    if (t.startsWith('₹')) return t;
+    if (!isNaN(t)) return `₹${t}`;
+    return t;
+  }
+
+  function generate() {
+    const id = parseInt(document.getElementById('idCounter').value) || 1;
+    const title = document.getElementById('title').value.trim() || 'N/A';
+    const description = document.getElementById('description').value.trim() || 'N/A';
+    const price = formatPrice(document.getElementById('price').value);
+    const link = document.getElementById('link').value.trim() || '';
+    const image = document.getElementById('image').value.trim() || 'imageVar';
+    const copiesSold = document.getElementById('copiesSold').value.trim() || '0';
+    const longDesc = document.getElementById('longDescription').value;
+    const shouldBuy = document.getElementById('shouldYouBuyFor').value;
+
+    const obj = `,{
+  id: ${id},
+  title: "${title}",
+  description: "${description}",
+  price: "${price}",
+  link: "${link}",
+  image: ${image},
+  isPopular: ${flags.isPopular},
+  isBestSeller: ${flags.isBestSeller},
+  isPlacementFocused: ${flags.isPlacementFocused},
+  isAdvancedLevel: ${flags.isAdvancedLevel},
+  copiesSold: "${copiesSold}",
+  longDescription: \`
+${longDesc}
+\`,
+  shouldYouBuyFor: \`
+${shouldBuy}
+\`
+}`;
+
+    lastOutput = obj;
+    document.getElementById('output').textContent = obj;
+    document.getElementById('outputStatus').textContent = '✓ ready';
+    document.getElementById('outputStatus').style.color = 'var(--green)';
+
+    document.getElementById('idCounter').value = id + 1;
+    saveState();
+  }
+
+  async function pasteInto(fieldId, btn) {
+    try {
+      const text = await navigator.clipboard.readText();
+      const el = document.getElementById(fieldId);
+      if (el.tagName === 'TEXTAREA') {
+        el.value = el.value ? el.value + '\n' + text : text;
+      } else {
+        el.value = text;
+      }
+      el.focus();
+      if (fieldId === 'title') titleInput.dispatchEvent(new Event('input'));
+      btn.classList.add('ok');
+      const prev = btn.textContent;
+      btn.textContent = '✓';
+      setTimeout(() => { btn.classList.remove('ok'); btn.textContent = prev; }, 1200);
+    } catch {
+      alert('Clipboard access denied. Please allow clipboard permissions.');
+    }
+  }
+
+  async function copyOutput() {
+    if (!lastOutput) { alert('Generate first!'); return; }
+    try {
+      await navigator.clipboard.writeText(lastOutput);
+      const btn = document.getElementById('copyBtn');
+      btn.textContent = '✓ Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    } catch { alert('Clipboard permission denied'); }
+  }
+
+  function clearAll() {
+    ['title','description','price','link','image','copiesSold','longDescription','shouldYouBuyFor'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    titleCount.textContent = '0 / 60';
+    titleCount.style.color = 'var(--muted)';
+    document.getElementById('output').textContent = '// Fill in the fields and click Generate Object';
+    document.getElementById('outputStatus').textContent = 'waiting...';
+    document.getElementById('outputStatus').style.color = 'var(--muted)';
+    lastOutput = '';
+  }
+</script>
+</body>
+</html>

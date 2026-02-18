@@ -1,10 +1,24 @@
 import React from 'react';
 import { Wrench, Bell, ArrowRight } from 'lucide-react';
-
+import { useNavigate } from 'react-router-dom';
 const UnderMaintenance = () => {
+  const navigate = useNavigate();   // 👈 ADD THIS
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4">
+    
+    <div className="bg-gradient-to-br bg-white flex items-center justify-center p-4 mt-20">
+      
       <div className="max-w-md w-full">
+        {/* Back to Home */}
+        <button
+          onClick={() => navigate('/')}
+          className="flex items-center gap-2 text-amber-600 hover:text-amber-700 font-medium text-sm mb-6 transition-colors"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          Back to Home
+        </button>
+      
         <div className="bg-white rounded-2xl shadow-xl p-8 text-center">
           {/* Icon */}
           <div className="inline-flex items-center justify-center w-16 h-16 bg-amber-100 rounded-full mb-6">

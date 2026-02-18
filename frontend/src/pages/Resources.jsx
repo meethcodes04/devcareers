@@ -12,7 +12,7 @@ function Resources() {
   const [wordIndex, setWordIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const priorityIds = [22, 2, 34];
+  const priorityIds = [1,3,32];
 
   const shuffleArray = (array) => {
     const shuffled = [...array];
