@@ -8,7 +8,7 @@ import Legal_info from './pages/Legal_info'
 import SubscribeUs from './pages/SubscribeUs'
 import Header from './components/Header'
 import Header1 from './components/Header1'
-// import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react"
 import UnderMaintenance from './components/UnderMaintenance'
 import ResourceDetailToPurchase from './components/ResourceDetailToPurchase'
 import PurchaseQueryPage from './pages/PurchaseQueryPage'
@@ -39,7 +39,7 @@ const App = () => {
         <Route path="/subscribe-us" element={<SubscribeUs/>}/>
         <Route path='/purchase-query' element={<PurchaseQueryPage/>}/>
       </Routes>
-      {/* <Analytics /> */}
+      <Analytics />
     </div>
   )
 }
