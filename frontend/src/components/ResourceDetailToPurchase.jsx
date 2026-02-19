@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ResourcesData from '../data/resourceData/resourceData';
 import PaymentButton from '../components/PaymentButton';
+import { notifyPurchase } from '../services/notifyService';
 
 function ResourceDetailToPurchase() {
   const { id } = useParams();
@@ -19,24 +20,35 @@ function ResourceDetailToPurchase() {
     window.scrollTo(0, 0);
   }, [id]);
 
-  const handlePaymentSuccess = (result) => {
-    const purchases = JSON.parse(localStorage.getItem('purchases') || '[]');
-    purchases.push({
-      resourceId: resource.id,
-      resourceTitle: resource.title,
-      amount: parseFloat(resource.price.replace(/[^0-9.]/g, '')),
-      purchaseDate: new Date().toISOString(),
-      paymentId: result.paymentId,
-      orderId: result.orderId,
-    });
-    localStorage.setItem('purchases', JSON.stringify(purchases));
-    setBuyerName(result.userName || '');
-    setPurchasedLink(result.driveLink || resource.link);
-    setTimeout(() => {
-      document.getElementById('drive-link-section')
-        ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 300);
-  };
+
+const handlePaymentSuccess = (result) => {
+  const purchases = JSON.parse(localStorage.getItem('purchases') || '[]');
+  purchases.push({
+    resourceId:    resource.id,
+    resourceTitle: resource.title,
+    amount:        parseFloat(resource.price.replace(/[^0-9.]/g, '')),
+    purchaseDate:  new Date().toISOString(),
+    paymentId:     result.paymentId,
+    orderId:       result.orderId,
+  });
+  localStorage.setItem('purchases', JSON.stringify(purchases));
+
+  // 🔔 Notify yourself
+  notifyPurchase({
+    resourceId:    resource.id,
+    resourceTitle: resource.title,
+    buyerName:     result.userName || '',
+    buyerEmail:    result.userEmail || '',
+    amount:        parseFloat(resource.price.replace(/[^0-9.]/g, '')),
+  }).catch(err => console.error('EmailJS notify failed:', err));
+
+  setBuyerName(result.userName || '');
+  setPurchasedLink(result.driveLink || resource.link);
+  setTimeout(() => {
+    document.getElementById('drive-link-section')
+      ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 300);
+};
 
   const handlePaymentError = (error) => {
     console.error('Payment failed:', error);

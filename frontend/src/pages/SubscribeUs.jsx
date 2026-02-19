@@ -3,9 +3,9 @@ import emailjs from '@emailjs/browser';
 import { useNavigate } from 'react-router-dom';
 
 // Environment variables (Vite uses import.meta.env)
-const EMAILJS_SERVICE_ID = 'service_p8e5ryw';
-const EMAILJS_TEMPLATE_ID = 'template_gq10icu';
-const EMAILJS_PUBLIC_KEY = 'v-3hNuDkN-OIpaeKR';
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID_MEETCODES;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID_SUBSCRIBE_US_MEETCODES;
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY_MEETCODES;
 const RECIPIENT_EMAIL = import.meta.env.VITE_RECIPIENT_EMAIL;
 const YOUTUBE_LINK = import.meta.env.VITE_YOUTUBE_LINK;
 const WHATSAPP_LINK = import.meta.env.VITE_WHATSAPP_LINK;
@@ -155,7 +155,7 @@ const SubscribeUs = () => {
 								value={formData.name}
 								onChange={handleChange}
 								required
-								className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition"
+								className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition text-gray-900"
 								placeholder="Enter your full name"
 							/>
 						</div>
@@ -172,7 +172,7 @@ const SubscribeUs = () => {
 								value={formData.email}
 								onChange={handleChange}
 								required
-								className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition"
+								className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition text-gray-900"
 								placeholder="Enter your email"
 							/>
 						</div>
