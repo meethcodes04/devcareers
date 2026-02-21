@@ -1,10 +1,44 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+const email = import.meta.env.VITE_RECIPIENT_EMAIL
+
+const PURCHASE_QUERY_ICON = "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+
+const CONTACT_REASONS = [
+  { title: 'Job & Internship Inquiries', desc: 'Questions about listings and opportunities' },
+  { title: 'Technical Support', desc: 'Help with platform issues or bugs' },
+  { title: 'Resource Issues', desc: 'Problems with purchased or downloaded materials', hasButton: true },
+  { title: 'Feedback & Complaints', desc: 'Share your experience or concerns', hasButton: true },
+  { title: 'Partnership Opportunities', desc: 'Collaborate or work together' },
+  { title: 'General Questions', desc: "Anything else you'd like to know" },
+]
+
+const ReasonCard = ({ title, desc, hasButton, onNavigate }) => (
+  <div className="flex items-start gap-3 p-4 rounded-lg bg-gradient-to-br from-white to-orange-50 border border-orange-100 hover:border-orange-300 transition-all hover:shadow-md">
+    <div className="w-2 h-2 bg-[#FA5500] rounded-full mt-2 flex-shrink-0" />
+    <div className="flex-1">
+      <h3 className="font-semibold text-black text-sm">{title}</h3>
+      <p className="text-xs text-black/60 mt-1">{desc}</p>
+      {hasButton && (
+        <button
+          onClick={onNavigate}
+          className="mt-2.5 flex items-center gap-1.5 px-3 py-1.5 bg-[#FA5500] hover:bg-orange-600 text-white text-xs font-semibold rounded-lg transition-colors"
+        >
+          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={PURCHASE_QUERY_ICON} />
+          </svg>
+          Purchase Query
+        </button>
+      )}
+    </div>
+  </div>
+)
+
 const Contact_Us = () => {
   const [copied, setCopied] = useState(false)
   const navigate = useNavigate()
-  const email = import.meta.env.VITE_RECIPIENT_EMAIL
+
   const copyEmail = () => {
     navigator.clipboard.writeText(email)
     setCopied(true)
@@ -15,29 +49,18 @@ const Contact_Us = () => {
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-50 px-4 py-12">
       <div className="max-w-4xl mx-auto">
 
-        {/* Header */}
         <div className="text-center mb-10">
-          <h1 className="text-4xl md:text-5xl font-bold text-black mb-4">
-            Contact Us
-          </h1>
-          <p className="text-black/60 text-sm md:text-base">
-            Have questions or need support? We're here to help.
-          </p>
+          <h1 className="text-4xl md:text-5xl font-bold text-black mb-4">Contact Us</h1>
+          <p className="text-black/60 text-sm md:text-base">Have questions or need support? We're here to help.</p>
         </div>
 
-        {/* Main Contact Card */}
         <div className="bg-white rounded-2xl border border-orange-200 shadow-lg p-6 md:p-10 mb-6">
 
           {/* Email Section */}
           <div className="text-center mb-8 p-6 bg-gradient-to-r from-orange-50 to-orange-100 rounded-xl border border-orange-200">
-            <p className="text-sm text-black/70 mb-3 font-medium">
-              Reach us directly via email
-            </p>
+            <p className="text-sm text-black/70 mb-3 font-medium">Reach us directly via email</p>
             <div className="flex items-center justify-center gap-2 flex-wrap">
-              <a
-                href={`mailto:${email}`}
-                className="inline-block text-[#FA5500] font-bold text-xl md:text-2xl hover:text-orange-600 transition-all"
-              >
+              <a href={`mailto:${email}`} className="inline-block text-[#FA5500] font-bold text-xl md:text-2xl hover:text-orange-600 transition-all">
                 {email}
               </a>
               <button
@@ -45,101 +68,29 @@ const Contact_Us = () => {
                 className="p-2 bg-white hover:bg-orange-50 text-[#FA5500] rounded-lg border border-orange-300 transition-all hover:border-orange-400 active:scale-95"
                 title="Copy email"
               >
-                {copied ? (
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                ) : (
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                )}
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={
+                    copied
+                      ? "M5 13l4 4L19 7"
+                      : "M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                  } />
+                </svg>
               </button>
             </div>
-            {copied && (
-              <p className="text-xs text-orange-600 mt-2 font-medium">✓ Email copied to clipboard!</p>
-            )}
+            {copied && <p className="text-xs text-orange-600 mt-2 font-medium">✓ Email copied to clipboard!</p>}
           </div>
 
           {/* Contact Reasons */}
           <div>
-            <h2 className="text-lg font-bold text-black mb-6 text-center">
-              What can we help you with?
-            </h2>
-
+            <h2 className="text-lg font-bold text-black mb-6 text-center">What can we help you with?</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="flex items-start gap-3 p-4 rounded-lg bg-gradient-to-br from-white to-orange-50 border border-orange-100 hover:border-orange-300 transition-all hover:shadow-md">
-                <div className="w-2 h-2 bg-[#FA5500] rounded-full mt-2 flex-shrink-0"></div>
-                <div>
-                  <h3 className="font-semibold text-black text-sm">Job & Internship Inquiries</h3>
-                  <p className="text-xs text-black/60 mt-1">Questions about listings and opportunities</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3 p-4 rounded-lg bg-gradient-to-br from-white to-orange-50 border border-orange-100 hover:border-orange-300 transition-all hover:shadow-md">
-                <div className="w-2 h-2 bg-[#FA5500] rounded-full mt-2 flex-shrink-0"></div>
-                <div>
-                  <h3 className="font-semibold text-black text-sm">Technical Support</h3>
-                  <p className="text-xs text-black/60 mt-1">Help with platform issues or bugs</p>
-                </div>
-              </div>
-
-              {/* Resource Issues — with Purchase Query button */}
-              <div className="flex items-start gap-3 p-4 rounded-lg bg-gradient-to-br from-white to-orange-50 border border-orange-100 hover:border-orange-300 transition-all hover:shadow-md">
-                <div className="w-2 h-2 bg-[#FA5500] rounded-full mt-2 flex-shrink-0"></div>
-                <div className="flex-1">
-                  <h3 className="font-semibold text-black text-sm">Resource Issues</h3>
-                  <p className="text-xs text-black/60 mt-1">Problems with purchased or downloaded materials</p>
-                  <button
-                    onClick={() => navigate('/purchase-query')}
-                    className="mt-2.5 flex items-center gap-1.5 px-3 py-1.5 bg-[#FA5500] hover:bg-orange-600 text-white text-xs font-semibold rounded-lg transition-colors"
-                  >
-                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                    </svg>
-                    Purchase Query
-                  </button>
-                </div>
-              </div>
-
-              {/* Feedback & Complaints — with Purchase Query button */}
-              <div className="flex items-start gap-3 p-4 rounded-lg bg-gradient-to-br from-white to-orange-50 border border-orange-100 hover:border-orange-300 transition-all hover:shadow-md">
-                <div className="w-2 h-2 bg-[#FA5500] rounded-full mt-2 flex-shrink-0"></div>
-                <div className="flex-1">
-                  <h3 className="font-semibold text-black text-sm">Feedback & Complaints</h3>
-                  <p className="text-xs text-black/60 mt-1">Share your experience or concerns</p>
-                  <button
-                    onClick={() => navigate('/purchase-query')}
-                    className="mt-2.5 flex items-center gap-1.5 px-3 py-1.5 bg-[#FA5500] hover:bg-orange-600 text-white text-xs font-semibold rounded-lg transition-colors"
-                  >
-                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                    </svg>
-                    Purchase Query
-                  </button>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3 p-4 rounded-lg bg-gradient-to-br from-white to-orange-50 border border-orange-100 hover:border-orange-300 transition-all hover:shadow-md">
-                <div className="w-2 h-2 bg-[#FA5500] rounded-full mt-2 flex-shrink-0"></div>
-                <div>
-                  <h3 className="font-semibold text-black text-sm">Partnership Opportunities</h3>
-                  <p className="text-xs text-black/60 mt-1">Collaborate or work together</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3 p-4 rounded-lg bg-gradient-to-br from-white to-orange-50 border border-orange-100 hover:border-orange-300 transition-all hover:shadow-md">
-                <div className="w-2 h-2 bg-[#FA5500] rounded-full mt-2 flex-shrink-0"></div>
-                <div>
-                  <h3 className="font-semibold text-black text-sm">General Questions</h3>
-                  <p className="text-xs text-black/60 mt-1">Anything else you'd like to know</p>
-                </div>
-              </div>
+              {CONTACT_REASONS.map(({ title, desc, hasButton }) => (
+                <ReasonCard key={title} title={title} desc={desc} hasButton={hasButton} onNavigate={() => navigate('/purchase-query')} />
+              ))}
             </div>
           </div>
 
-          {/* Divider */}
-          <div className="border-t border-orange-200 my-8"></div>
+          <div className="border-t border-orange-200 my-8" />
 
           {/* Response Time */}
           <div className="bg-gradient-to-r from-orange-100 to-orange-50 rounded-xl p-5 border border-orange-200">
@@ -158,7 +109,6 @@ const Contact_Us = () => {
 
         </div>
 
-        {/* Additional Info */}
         <div className="text-center bg-white rounded-xl border border-orange-200 p-4 shadow-sm">
           <p className="text-xs text-black/60">
             <span className="font-semibold text-[#FA5500]">Pro tip:</span> For urgent matters, please mention "URGENT" in your email subject line
