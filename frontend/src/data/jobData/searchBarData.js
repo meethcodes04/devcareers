@@ -1,15 +1,5 @@
 export const placeholderWords = [
-
   'Full-stack Developer',
-  'Chennai',
-  'Data Scientist',
-  'Flipkart',
-  'UI/UX Designer',
-  'Hyderabad',
-  'TCS',
-  'Remote',
-  'Bangalore',
-  'Mobile App Developer',
   'Mumbai',
   'Infosys',
   'Front-end Developer',

@@ -571,7 +571,7 @@ Helps you build and deploy real projects confidently`
     description: "LeetCode problems organized by top tech companies",
     price: "₹29",
     link: "https://drive.google.com/drive/folders/1H6hbJE9ER0XpugK6prjEh2cXNnbMnVRg?usp=sharing",
-    image: companyWise    ,
+    image: companyWise,
     isPopular: true,
     isBestSeller: false,
     isPlacementFocused: true,

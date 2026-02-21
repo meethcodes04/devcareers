@@ -10,7 +10,7 @@ import ResourcesGrid from '../components/resource/ResourcesGrid';
 import PackagesGrid from '../components/resource/PackagesGrid';
 import HelpCTA from '../components/common/HelpCTA';
 
-const priorityIds = [22, 2, 34];
+const priorityIds = [1,3,28];
 
 const shuffleArray = (array) => {
   const shuffled = [...array];
@@ -30,19 +30,40 @@ function Resources() {
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-  const organizedResources = useMemo(() => {
-    const priority = [];
-    const others = [];
-    ResourcesData.forEach((resource) => {
-      if (priorityIds.includes(resource.id)) {
-        priority.push(resource);
-      } else {
-        others.push(resource);
-      }
-    });
-    priority.sort((a, b) => priorityIds.indexOf(a.id) - priorityIds.indexOf(b.id));
-    return [...priority, ...shuffleArray(others)];
-  }, []);
+  const priorityIds = [1, 3, 28]; // Position 1, 2, 5 respectively
+
+const organizedResources = useMemo(() => {
+  const priority = [];
+  const free = [];
+  const others = [];
+
+  ResourcesData.forEach((resource) => {
+    if (priorityIds.includes(resource.id)) {
+      priority.push(resource);
+    } else if (resource.price === '') {   // ✅ free = empty price string
+      free.push(resource);
+    } else {
+      others.push(resource);
+    }
+  });
+
+  priority.sort((a, b) => priorityIds.indexOf(a.id) - priorityIds.indexOf(b.id));
+
+  const shuffledFree = shuffleArray(free);
+  const shuffledOthers = shuffleArray(others);
+
+  const randomPool = shuffleArray([...shuffledFree.slice(2), ...shuffledOthers]);
+
+  return [
+    priority[0],       // position 1
+    priority[1],       // position 2
+    shuffledFree[0],   // position 3
+    shuffledFree[1],   // position 4
+    priority[2],       // position 5
+    ...randomPool,     // position 6 onwards
+  ].filter(Boolean);
+}, []);
+
 
   // Animated placeholder typewriter effect
   useEffect(() => {
