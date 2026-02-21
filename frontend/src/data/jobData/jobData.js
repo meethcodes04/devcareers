@@ -15,21 +15,21 @@ const companiesData = [
     Stipend: "N/A",
   }
   ,{
-    id: 150,
+    id: 159,
     company: 'Recipto',
     role: 'Node js Developer',
     hiringLink: 'https://www.naukri.com/job-listings-node-js-developer-recipto-hyderabad-0-to-3-years-180226006251',
     location: 'Hyderabad',
     Stipend: 'N/A',
   },{
-    id: 151,
+    id: 160,
     company: 'Kisan Udyog',
     role: 'Python Developer Internship',
     hiringLink: 'https://unstop.com/o/91hUDoS?lb=vhj6xFV&utm_medium=Share&utm_source=internships&utm_campaign=Meetson4554',
     location: 'Remote',
     Stipend: 'N/A',
   },{
-    id: 152,
+    id: 161,
     company: 'Eqipped',
     role: 'Full Stack Developer Internship',
     hiringLink: 'https://unstop.com/o/x7Xifbn?lb=vhj6xFV&utm_medium=Share&utm_source=internships&utm_campaign=Meetson4554',
