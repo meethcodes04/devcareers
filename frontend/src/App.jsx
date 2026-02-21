@@ -1,12 +1,17 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
+import { lazy, Suspense } from 'react'
+const ResourceDetailToPurchase = lazy(() => import('./components/resource/ResourceDetailToPurchase'))
+const Companies_details = lazy(() => import('./pages/Companies_details'))
+
+// import Companies_details from './pages/Companies_details'
+// import ResourceDetailToPurchase from './components/resource/ResourceDetailToPurchase'
+
 import Home from './pages/Home'
-import Companies_details from './pages/Companies_details'
 import Contact_us from './pages/Contact_us'
 import Legal_info from './pages/Legal_info'
 import SubscribeUs from './pages/Subscribe_us'
 import Resources from './pages/Resources'
-import ResourceDetailToPurchase from './components/resource/ResourceDetailToPurchase'
 import PurchaseQueryPage from './pages/Purchase_query'
 import Header from './components/common/Header'
 import Header1 from './components/common/Header1'
@@ -22,6 +27,7 @@ const App = () => {
       <Header1 />
       <Header />
       <ScrollToTop/>
+      <Suspense  fallback={<div>Loading...</div>}>
       <Routes>
         <Route path="/" element={<Home />} />
 
@@ -40,6 +46,7 @@ const App = () => {
         <Route path="/subscribe-us" element={<SubscribeUs/>}/>
         <Route path='/purchase-query' element={<PurchaseQueryPage/>}/>
       </Routes>
+      </Suspense>
       <Analytics />
     </div>
   )
