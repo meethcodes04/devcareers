@@ -36,6 +36,20 @@ const companiesData = [
     location: 'Agra',
     Stipend: 'N/A',
   }
+  ,{
+    id: 162,
+    company: 'Adobe',
+    role: 'Technical Consultant',
+    hiringLink: 'https://careers.adobe.com/us/en/job/ADOBUSR158976EXTERNALENUS/Associate-Technical-Consultant',
+    location: 'N/A', Stipend: 'N/A'
+  }
+  ,{
+    id: 163,
+    company: 'Volvo',
+    role: 'Graduate Apprentice Trainee',
+    hiringLink: 'https://jobs.volvogroup.com/job/Bangalore-Graduate-Apprentice-Trainee-560058/1342119555',
+    location: 'N/A', Stipend: 'N/A'
+  }
 ]
 
 export default companiesData
