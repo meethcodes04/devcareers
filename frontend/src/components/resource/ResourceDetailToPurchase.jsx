@@ -17,6 +17,7 @@ const RazorpayBadge = () => (
     </svg>
     Verified by Razorpay
   </a>
+  
 )
 
 const LevelBadges = ({ resource }) => (

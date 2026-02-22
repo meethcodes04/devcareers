@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-
+import ResourcesTopmate from '../../data/resourceData/resourceTopmate';
 const BADGE_CONFIG = [
   {
     key: 'isPopular',
@@ -66,8 +66,22 @@ const PriceLabel = ({ price }) => (
 function ResourceCard({ resource, isMobile = false }) {
   const navigate = useNavigate()
 
-  const isFree = !resource.price || resource.price === ''
-  const handleCardClick = () => isFree ? window.open(resource.link, '_blank') : navigate(`/resource/${resource.id}`)
+
+  // inside ResourceCard:
+  const isFree = !resource.price || resource.price === '';
+
+  const handleCardClick = () => {
+    if (isFree) {
+      window.open(resource.link, '_blank');
+    } else {
+      const topmateLink = ResourcesTopmate[resource.id];
+      if (topmateLink) {
+        window.open(topmateLink, '_blank');
+      } else {
+        navigate(`/resource/${resource.id}`); // fallback to razorpay if no topmate link set
+      }
+    }
+  };
 
   const badges = BADGE_CONFIG.filter(({ key }) => resource?.[key])
 
