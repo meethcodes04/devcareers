@@ -4,51 +4,45 @@ const companiesData = [
     company: "Meesho",
     role: "Front-End Developer",
     hiringLink: "https://www.naukri.com/job-listings-front-end-developer-meesho-bengaluru-0-to-2-years-271125013614",
-    location: "Mumbai",
-    Stipend: "NA",
   }, {
     id: 120,
     company: "Qualcomm India Private Limited",
     role: "2026 Campus Hire Engineer SW",
     hiringLink: "https://careers.qualcomm.com/careers/job/446706882270",
-    location: "N/A",
-    Stipend: "N/A",
   }
   ,{
     id: 159,
     company: 'Recipto',
     role: 'Node js Developer',
     hiringLink: 'https://www.naukri.com/job-listings-node-js-developer-recipto-hyderabad-0-to-3-years-180226006251',
-    location: 'Hyderabad',
-    Stipend: 'N/A',
   },{
     id: 160,
     company: 'Kisan Udyog',
     role: 'Python Developer Internship',
     hiringLink: 'https://unstop.com/o/91hUDoS?lb=vhj6xFV&utm_medium=Share&utm_source=internships&utm_campaign=Meetson4554',
-    location: 'Remote',
-    Stipend: 'N/A',
   },{
     id: 161,
     company: 'Eqipped',
     role: 'Full Stack Developer Internship',
     hiringLink: 'https://unstop.com/o/x7Xifbn?lb=vhj6xFV&utm_medium=Share&utm_source=internships&utm_campaign=Meetson4554',
-    location: 'Agra',
-    Stipend: 'N/A',
   }
   ,{
     id: 162,
     company: 'Adobe',
     role: 'Technical Consultant',
     hiringLink: 'https://careers.adobe.com/us/en/job/ADOBUSR158976EXTERNALENUS/Associate-Technical-Consultant',
-    location: 'N/A', Stipend: 'N/A'
   }
   ,{
     id: 163,
     company: 'Volvo',
     role: 'Graduate Apprentice Trainee',
     hiringLink: 'https://jobs.volvogroup.com/job/Bangalore-Graduate-Apprentice-Trainee-560058/1342119555',
-    location: 'N/A', Stipend: 'N/A'
+  }
+  ,{
+    id: 164,
+    company: 'Cognizant',
+    role: 'Analyst Trainee GenC Hiring',
+    hiringLink: 'https://app.joinsuperset.com/join/#/signup/student/jobprofiles/65ac431a-2d60-417a-b1f6-6b0f455a1d33'
   }
 ]
 

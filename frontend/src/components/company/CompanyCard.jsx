@@ -49,7 +49,6 @@ const CompanyCard = ({ company }) => {
         <div className="space-y-3">
           {[
             { Icon: Building2, value: company.company },
-            { Icon: MapPin, value: company.location },
           ].map(({ Icon, value }) => (
             <div key={value} className="flex items-center gap-2 text-sm text-black/60">
               <Icon className="w-4 h-4 flex-shrink-0 text-black/40" />
