@@ -59,6 +59,12 @@ const companiesData = [
     company: 'Cencora', role: 'Analyst I',
     hiringLink: 'https://careers.cencora.com/us/en/job/CHKCENUSR261061EXTERNALENUS/Analyst-I-Data-IN'
   }
+  ,{
+    id: 168,
+    company: 'Naukri Campus',
+    role: 'Career Verse',
+    hiringLink: 'https://www.naukri.com/campus/contests/career-fair-2026?action=enrol&referral=e2000084-rEKBRXA-pses&uapp=801&utm_source=share_desktop&utm_medium=referral'
+  }
 ]
 
 export default companiesData
