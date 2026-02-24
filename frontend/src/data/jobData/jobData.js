@@ -44,6 +44,21 @@ const companiesData = [
     role: 'Analyst Trainee GenC Hiring',
     hiringLink: 'https://app.joinsuperset.com/join/#/signup/student/jobprofiles/65ac431a-2d60-417a-b1f6-6b0f455a1d33'
   }
+  ,{
+    id: 165,
+    company: 'Hevo', role: 'SDE I',
+    hiringLink: 'https://jobs.lever.co/hevodata/c0c6ce59-880b-46fb-b45f-61e1aec2ad77',
+  }
+  ,{
+    id: 166,
+    company: 'Binated', role: 'UI UX Desginer',
+    hiringLink: 'https://www.linkedin.com/jobs/view/4376013880',
+  }
+  ,{
+    id: 167,
+    company: 'Cencora', role: 'Analyst I',
+    hiringLink: 'https://careers.cencora.com/us/en/job/CHKCENUSR261061EXTERNALENUS/Analyst-I-Data-IN'
+  }
 ]
 
 export default companiesData
