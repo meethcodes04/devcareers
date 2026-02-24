@@ -1,12 +1,11 @@
 import React, { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import ResourcesData from '../../data/resourceData/resourceData'
+import ResourcesTopmate from '../../data/resourceData/resourceTopmate'
 
 const CompanyDetailDownbar = () => {
 
   const shuffledData = useMemo(() => {
-
-    // 🔥 Fixed IDs you want
     const firstId = 1
     const secondId = 3
     const fourthId = 12
@@ -15,15 +14,10 @@ const CompanyDetailDownbar = () => {
     const secondItem = ResourcesData.find(item => item.id === secondId)
     const fourthItem = ResourcesData.find(item => item.id === fourthId)
 
-    // Remove fixed items from shuffle pool
     const remainingItems = ResourcesData.filter(
-      item =>
-        item.id !== firstId &&
-        item.id !== secondId &&
-        item.id !== fourthId
+      item => item.id !== firstId && item.id !== secondId && item.id !== fourthId
     )
 
-    // Shuffle remaining
     const shuffled = [...remainingItems]
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -31,15 +25,23 @@ const CompanyDetailDownbar = () => {
     }
 
     const randomItems = shuffled.slice(0, 6)
-    return [
-      firstItem,
-      secondItem,
-      randomItems[0],
-      fourthItem,
-      ...randomItems.slice(1)
-    ].filter(Boolean)
-
+    return [firstItem, secondItem, randomItems[0], fourthItem, ...randomItems.slice(1)].filter(Boolean)
   }, [])
+
+  const handleClick = (item) => {
+    const isFree = !item.price || item.price === ''
+    if (isFree) {
+      window.open(item.link, '_blank')
+    } else {
+      const topmateLink = ResourcesTopmate[item.id]
+      if (topmateLink) {
+        window.open(topmateLink, '_blank')
+      }
+      // paid + no topmate = handled by Link below
+    }
+  }
+
+  const cardClass = "flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-orange-50 transition-colors border border-gray-200 hover:border-orange-300"
 
   return (
     <div className="mt-8">
@@ -48,31 +50,45 @@ const CompanyDetailDownbar = () => {
       </h3>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {shuffledData.map((item) => (
-          <Link
-            key={item.id}
-            to={!item.price || item.price === ''
-              ? item.link
-              : `/resource/${item.id}`
-            }
-            className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg
-                       hover:bg-orange-50 transition-colors
-                       border border-gray-200 hover:border-orange-300"
-          >
-            <img
-              src={item.image}
-              alt={item.title}
-              className="w-20 h-20 object-contain rounded-md flex-shrink-0"
-              loading="lazy"
-            />
-            <span className="text-sm font-medium text-gray-800 flex-1">
-              {item.title}
-            </span>
-            <span className="text-orange-500 font-bold text-lg">→</span>
-          </Link>
-        ))}
+        {shuffledData.map((item) => {
+          const isFree = !item.price || item.price === ''
+          const topmateLink = ResourcesTopmate[item.id]
+          const content = (
+            <>
+              <img
+                src={item.image}
+                alt={item.title}
+                className="w-20 h-20 object-contain rounded-md flex-shrink-0"
+                loading="lazy"
+              />
+              <span className="text-sm font-medium text-gray-800 flex-1">{item.title}</span>
+              <span className="text-orange-500 font-bold text-lg">→</span>
+            </>
+          )
 
-        {/* 🔥 More Resources Card */}
+          if (isFree) {
+            return (
+              <a key={item.id} href={item.link} target="_blank" rel="noopener noreferrer" className={cardClass}>
+                {content}
+              </a>
+            )
+          }
+
+          if (topmateLink) {
+            return (
+              <a key={item.id} href={topmateLink} target="_blank" rel="noopener noreferrer" className={cardClass}>
+                {content}
+              </a>
+            )
+          }
+
+          return (
+            <Link key={item.id} to={`/resource/${item.id}`} className={cardClass}>
+              {content}
+            </Link>
+          )
+        })}
+
         <Link
           to="/resources"
           className="flex items-center justify-center p-4 bg-orange-50 rounded-lg
@@ -81,7 +97,6 @@ const CompanyDetailDownbar = () => {
         >
           View More Resources →
         </Link>
-
       </div>
     </div>
   )
