@@ -67,8 +67,8 @@ const companiesData = [
   }
   ,{
     id: 169,
-    company: 'Deloitte', role: 'Java Springboot Full Stack',
-    hiringLink: 'https://southasiacareers.deloitte.com/job/Mumbai-Analyst-Java-Springboot-Full-Stack-Mumbai-Engineering/52798444'
+    company: 'EY', role: 'SharePoint - Interns',
+    hiringLink: 'https://eyglobal.yello.co/jobs/1P5qeCUHqr5QOss5dpjGTw?job_board_id=c1riT--B2O-KySgYWsZO1Q'
   }
   ,{
     id: 170,
@@ -79,6 +79,11 @@ const companiesData = [
     id: 171,
     company: 'Adengage', role: 'MERN stack developer Intern',
     hiringLink: 'https://www.naukri.com/job-listings-mern-stack-developer-intern-adengage-mumbai-hyderabad-mumbai-hyderabad-0-to-1-years-240226930230cd'
+  }
+  ,{
+    id:172,
+    company: 'Acamedian', role: 'Trainee Software Engineer',
+    hiringLink: 'https://academian.keka.com/careers/jobdetails/129744'
   }
 ]
 
