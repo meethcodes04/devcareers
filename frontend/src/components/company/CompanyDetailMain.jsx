@@ -12,11 +12,11 @@ const CompanyDetailMain = ({ selectedCompany }) => {
       >
         ← Back to Home
       </Link>
-      <h2 className="text-3xl font-bold text-gray-800">{selectedCompany.company}</h2>
+      <h2 className="text-3xl font-bold text-gray-800">{selectedCompany.role}</h2>
       <h2 className="mt-2 text-2xl font-bold text-gray-800">
-        Role: {selectedCompany.role}
+        Company: {selectedCompany.company}
       </h2>
-      <p className="text-gray-600 mb-6">{selectedCompany.title}</p>
+      <p className="text-gray-600 mb-6"></p>
 
       <ApplySection selectedCompany={selectedCompany} />
 

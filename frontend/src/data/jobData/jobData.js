@@ -65,6 +65,21 @@ const companiesData = [
     role: 'Career Verse',
     hiringLink: 'https://www.naukri.com/campus/contests/career-fair-2026?action=enrol&referral=e2000084-rEKBRXA-pses&uapp=801&utm_source=share_desktop&utm_medium=referral'
   }
+  ,{
+    id: 169,
+    company: 'Deloitte', role: 'Java Springboot Full Stack',
+    hiringLink: 'https://southasiacareers.deloitte.com/job/Mumbai-Analyst-Java-Springboot-Full-Stack-Mumbai-Engineering/52798444'
+  }
+  ,{
+    id: 170,
+    company: 'Career Creed', role: 'Full stack developer',
+    hiringLink: 'https://www.naukri.com/job-listings-full-stack-developer-career-creed-mumbai-0-to-5-years-240226502057'
+  }
+  ,{
+    id: 171,
+    company: 'Adengage', role: 'MERN stack developer Intern',
+    hiringLink: 'https://www.naukri.com/job-listings-mern-stack-developer-intern-adengage-mumbai-hyderabad-mumbai-hyderabad-0-to-1-years-240226930230cd'
+  }
 ]
 
 export default companiesData
