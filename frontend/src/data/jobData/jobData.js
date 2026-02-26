@@ -85,6 +85,21 @@ const companiesData = [
     company: 'Academian', role: 'Trainee Software Engineer',
     hiringLink: 'https://academian.keka.com/careers/jobdetails/129744'
   }
+  ,{
+    id:173,
+    company: 'HCL', role:'Software Engineer',
+    hiringLink:'https://unstop.com/o/QLPRqv3?lb=vhj6xFV&utm_medium=Share&utm_source=jobs&utm_campaign=Meetson4554'
+  }
+  ,{
+    id:174,
+    company: 'Learnyst', role:'Backend Engineer',
+    hiringLink:'https://wellfound.com/jobs/3849463-backend-engineer-ruby-on-rails-offline-interview'
+  }
+  ,{
+    id:175,
+    company: 'Hummingbird Web Solutions Pvt Ltd', role: 'Software Intern',
+    hiringLink: 'https://docs.google.com/forms/d/e/1FAIpQLSdUPM9Ww8O0cr4fWSOmFUOpNhdnFD5yB73H-IhaPp4lcrYtHQ/viewform'
+  }
 ]
 
 export default companiesData
