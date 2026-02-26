@@ -26,19 +26,20 @@ function PackagesGrid() {
             <div key={pkg.id} className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl border-2 border-green-200 p-6 shadow-lg hover:shadow-xl transition-all">
 
               <div className="flex items-center justify-between mb-4">
-                <span className="bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">{discountPct}% OFF</span>
+                <span className="bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">{pkg.savings}% OFF</span>
                 <span className="text-red-600 font-semibold text-sm">Valid till {pkg.expDate}</span>
               </div>
 
               <h5 className="text-xl font-bold text-gray-800 mb-2">{pkg.title}</h5>
               <p className="text-gray-600 text-sm mb-4">{pkg.description}</p>
 
-              <div className="flex items-center gap-2 mb-4">
-                {includedResources.slice(0, 3).map((resource, idx) => (
-                  <img key={idx} src={resource.image} alt={resource.title} className="w-20 h-20 object-cover rounded-lg border-2 border-white shadow-md" />
-                ))}
-                <p className="text-xs text-gray-500 font-medium ml-2">Includes {includedResources.length} resources</p>
-              </div>
+              <div className="flex flex-wrap items-center gap-2 mb-4">
+  {includedResources.slice(0, 5).map((resource, idx) => (
+    <img key={idx} src={resource.image} alt={resource.title} 
+      className="w-14 h-14 md:w-20 md:h-20 object-cover rounded-lg border-2 border-white shadow-md" />
+  ))}
+  <p className="text-xs text-gray-500 font-medium">Includes {includedResources.length} resources</p>
+</div>
 
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-2xl font-bold text-gray-400 line-through">₹{pkg.originalPrice}</span>

@@ -9,9 +9,31 @@ const packagesData = [
     originalPrice: 67,
     discountedPrice: 49,
     link: 'https://topmate.io/meet_g/1969991',
-    savings: 20,
+    savings: 26,
     expDate: '20-03-2026'
-  },
+  }
+  , {
+    id: 'pkg-2',
+    title: 'Ultimate DSA Preparation Bundle',
+    description: '15+ top company LeetCode sheets, 100+ structured DSA questions, Oracle-specific interview problems, plus 40 foundational coding questions (Free) — perfect for placement and product-based company preparation.',
+    includedResourceIds: [28, 12],
+    originalPrice: 48,
+    discountedPrice: 29,
+    link: 'https://topmate.io/meet_g/1980496',
+    savings: 39,
+    expDate: '27-03-2026',
+  }
+  , {
+    id: 'pkg-3',
+    title: 'Ultimate Developer Interview Question',
+    description: '400+ curated interview questions with answers across Node.js, React, JavaScript, Java, and SQL - perfect for complete tech interview preparation.',
+    includedResourceIds: [30, 20, 22, 31, 1],
+    originalPrice: 75,
+    discountedPrice: 49,
+    link: 'https://topmate.io/meet_g/1980309',
+    savings: 34,
+    expDate: '27-03-2026',
+  }
 ];
 
 export default packagesData;
