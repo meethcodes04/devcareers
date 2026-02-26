@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import ResourcesData from '../../data/resourceData/resourceData'
 import ResourcesTopmate from '../../data/resourceData/resourceTopmate'
-
+import NaukriCareerVerseBanner from '../common/NaukriCareerVerseBanner'
 const CompanyDetailDownbar = () => {
 
   const shuffledData = useMemo(() => {
@@ -45,6 +45,7 @@ const CompanyDetailDownbar = () => {
 
   return (
     <div className="mt-8">
+      <NaukriCareerVerseBanner referralLink="https://www.naukri.com/campus/contests/career-fair-2026?action=enrol&referral=e2000084-rEKBRXA-pses&uapp=801&utm_source=share_desktop&utm_medium=referral" />
       <h3 className="text-xl font-bold text-gray-800 mb-4">
         Resources to Crack Interviews
       </h3>

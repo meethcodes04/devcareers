@@ -82,7 +82,7 @@ const companiesData = [
   }
   ,{
     id:172,
-    company: 'Acamedian', role: 'Trainee Software Engineer',
+    company: 'Academian', role: 'Trainee Software Engineer',
     hiringLink: 'https://academian.keka.com/careers/jobdetails/129744'
   }
 ]
