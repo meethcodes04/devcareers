@@ -6,9 +6,9 @@ import NaukriCareerVerseBanner from '../common/NaukriCareerVerseBanner'
 const CompanyDetailDownbar = () => {
 
   const shuffledData = useMemo(() => {
-    const firstId = 1
+    const firstId = 0
     const secondId = 3
-    const fourthId = 12
+    const fourthId = 28
 
     const firstItem = ResourcesData.find(item => item.id === firstId)
     const secondItem = ResourcesData.find(item => item.id === secondId)
