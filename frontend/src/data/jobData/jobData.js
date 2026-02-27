@@ -100,6 +100,30 @@ const companiesData = [
     company: 'Hummingbird Web Solutions Pvt Ltd', role: 'Software Intern',
     hiringLink: 'https://docs.google.com/forms/d/e/1FAIpQLSdUPM9Ww8O0cr4fWSOmFUOpNhdnFD5yB73H-IhaPp4lcrYtHQ/viewform'
   }
+  ,{
+    id: 176, company: 'Toddle', role: 'Associate Software Engineer Frontend', 
+    hiringLink: 'https://wellfound.com/jobs/2212997-associate-software-engineer-frontend'
+  }
+  ,{
+    id: 177, company: 'PrepAiro', role: 'Backend Engineer', 
+    hiringLink: 'https://wellfound.com/jobs/3899713-backend-engineer-java-python'
+  }
+  ,{
+    id: 178, company: 'Softdel', role: 'Full Stack Intern', 
+    hiringLink: 'https://www.softdel.com/jobs/intern-full-stack'
+  }
+  // ,{
+  //   id: 179, company: 'MikeLegal', role: 'Backend Engineer SDE I',
+  //   hiringLink: 'https://wellfound.com/jobs/936853-backend-engineer-sde-i',
+  // }
+  // ,{
+  //   id: 180, company: 'MikeLegal', role: 'Backend Intern',
+  //   hiringLink: 'https://wellfound.com/jobs/2657129-backend-intern'
+  // }
+  // ,{
+  //   id: 181, company: 'RxGPT', role: 'Frontend Intern',
+  //   hiringLink: 'https://wellfound.com/jobs/3543681-front-end-intern'
+  // }
 ]
 
 export default companiesData
