@@ -112,18 +112,18 @@ const companiesData = [
     id: 178, company: 'Softdel', role: 'Full Stack Intern', 
     hiringLink: 'https://www.softdel.com/jobs/intern-full-stack'
   }
-  // ,{
-  //   id: 179, company: 'MikeLegal', role: 'Backend Engineer SDE I',
-  //   hiringLink: 'https://wellfound.com/jobs/936853-backend-engineer-sde-i',
-  // }
-  // ,{
-  //   id: 180, company: 'MikeLegal', role: 'Backend Intern',
-  //   hiringLink: 'https://wellfound.com/jobs/2657129-backend-intern'
-  // }
-  // ,{
-  //   id: 181, company: 'RxGPT', role: 'Frontend Intern',
-  //   hiringLink: 'https://wellfound.com/jobs/3543681-front-end-intern'
-  // }
+  ,{
+    id: 179, company: 'MikeLegal', role: 'Backend Engineer SDE I',
+    hiringLink: 'https://wellfound.com/jobs/936853-backend-engineer-sde-i',
+  }
+  ,{
+    id: 180, company: 'MikeLegal', role: 'Backend Intern',
+    hiringLink: 'https://wellfound.com/jobs/2657129-backend-intern'
+  }
+  ,{
+    id: 181, company: 'RxGPT', role: 'Frontend Intern',
+    hiringLink: 'https://wellfound.com/jobs/3543681-front-end-intern'
+  }
 ]
 
 export default companiesData
